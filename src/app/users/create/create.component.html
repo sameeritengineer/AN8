@@ -1,0 +1,52 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/" class="text-info">Home</a></li>
+    <li class="breadcrumb-item"><a routerLink="/users" class="text-info">Users</a></li>
+    <li class="breadcrumb-item active " aria-current="page">Add Users</li>
+  </ol>
+</nav>
+
+<mat-card class="shadow">
+  <mat-card-header class="bg-info rounded">
+    <mat-card-title class="m-2 text-white" >Add User</mat-card-title>
+  </mat-card-header>
+  <form>
+    <mat-card-content>
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Enter username">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Email" formControl="emailFormControl">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Enter password">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Enter password again" required>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input matInput placeholder="Enter address" formControlName="address" required>
+        </mat-form-field>
+      </p>
+    </mat-card-content>
+    <mat-card-actions align="center">
+      <button mat-raised-button class="bg-info text-white">Create</button>
+      <button type="button" mat-raised-button color="warn">Cancel</button>
+    </mat-card-actions>
+  </form>
+</mat-card>

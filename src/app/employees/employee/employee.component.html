@@ -1,0 +1,59 @@
+<form [formGroup]='service.form' class="m-10">
+    <h1 mat-dialog-title>Add employee detail</h1>
+    <div mat-dialog-content>
+        <mat-grid-list cols="2" rowHeight="300px">
+            <mat-grid-tile>
+                <div class="w-100 p-5">
+                    <input type="hidden" formControlName="$key">
+                    <mat-form-field class="w-100">
+                        <input formControlName="fullName" matInput placeholder="Enter name">
+                        <mat-error>This field is mandatory.</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input type="email" formControlName="email" matInput placeholder="Enter email">
+                        <mat-error>Invalid email.</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input formControlName="mobile" matInput placeholder="Enter mobile">
+                        <mat-error *ngIf="service.form.controls['mobile'].errors?.required">This field is mandatory.</mat-error>
+                        <mat-error *ngIf="service.form.controls['mobile'].errors?.minlength">Minimum 8 charactors needed.</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <input formControlName="city" matInput placeholder="Enter city">
+                    </mat-form-field>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <div class="w-100">
+                    <div class="pb-10">
+                        <mat-radio-group formControlName="gender">
+                            <mat-radio-button value="1" class="ml-5">Male</mat-radio-button>
+                            <mat-radio-button value="2" class="ml-5">Female</mat-radio-button>
+                            <mat-radio-button value="3" class="ml-5">Others</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <mat-form-field class="w-100 ml-5">
+                        <mat-select formControlName="department" placeholder="Department">
+                            <mat-option>None</mat-option>
+                            <ng-container *ngFor="let department of departments">
+                                <mat-option value="{{department.id}}">{{department.name}}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="w-99 ml-5 pb-10">
+                        <input formControlName="hireDate" matInput [matDatepicker]="picker" placeholder="Hire Date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <div class="ml-5">
+                        <mat-checkbox formControlName="isPermanent">Permanent Employee</mat-checkbox>
+                    </div>
+                </div> 
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div mat-dialog-actions align="center">
+        <button mat-raised-button color="warn" (click)="onClear()">No Thanks</button>
+        <button mat-raised-button color="primary" type="submmit" [disabled]="service.form.invalid" cdkFocusInitial>Submit</button>
+    </div>
+</form>
